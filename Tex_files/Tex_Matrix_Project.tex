@@ -1,0 +1,323 @@
+\documentclass{beamer}
+\usepackage{graphicx}
+\usepackage{nicefrac}
+\usetheme{Warsaw}
+\graphicspath{ {Home/Desktop/} }
+\usepackage{tikz}
+\usepackage{tkz-euclide} % loads  TikZ and tkz-base
+\usetkzobj{all}
+\title[]{EE1390}
+\subtitle{Matrix Project}
+
+\institute{IIT HYDERABAD}
+\author{Ganraj(EE18BTECH11016) and Kartikeya(EE18BTECH11025)}
+
+\date{}
+
+\begin{document}
+
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Question}
+
+The equation of perpendicular bisectors of sides AB and AC of a triangle ABC  are x-y+5=0 and x+2y=0 respectively. If a point A is (1,-2) then the equation of line BC is 
+
+
+
+
+
+\setlength{\parindent}{8cm}
+[IIT 1986]
+\end{frame}
+
+\begin{tikzpicture}
+[
+ scale=0.9,
+  >=stealth,
+  point/.style = {draw, circle, fill = black, inner sep = 1pt},
+]
+
+\node (A) at (1,-2) [point,label = below right:$A{(1,-2)}$] {};
+\node (B) at (-7,6)[point,label = above left:$B{}$] {};
+\node (C) at (2.2,0.4)[point,label = above right:$C{}$] {};
+\node (Y) at (1.6,-0.8)[point,label = above right:$Y{}$] {};
+\node (N) at (-6,3)[point,label = above left:$N{}$] {};
+\node (X) at (-3,2)[point,label = above right:$X{}$] {};
+\node (M) at (-5,0)[point,label = below right:$M{}$] {};
+\node (Z) at (-10/3,5/3)[point,label = below:$Z{}$] {};
+
+
+
+
+
+
+\draw (A) -- (B) -- (C) -- (A) -- (Y) -- (N);
+\tkzMarkRightAngle[fill = blue!20,size=.2](A,Y,Z)
+\tkzMarkRightAngle[fill = blue!20,size=.2](B,X,Z)
+\draw (A) -- (B) -- (C) -- (A) -- (X) -- (M);
+
+
+\end{tikzpicture}
+
+ 
+
+
+\begin{frame}{Solution(Approach 1)}
+Converting the problem in matrix form:
+
+
+
+
+\vspace{2 mm}
+Let the perpendicular bisector of AB and AC are XZ and ZY respectively.
+
+
+
+Equation of XZ and ZY in matrix form are respectively:
+\setlength{\parindent}{4cm}  
+
+     
+ (1 \ -1)$\boldsymbol{x}+5=0$
+
+		    (1 \  2)$\boldsymbol{x}=0$
+\setlength{\parindent}{0cm}
+
+
+Since the equation in matrix form of line is
+\begin{align*}
+n^Tx = p; 
+\end{align*}
+\vspace{2 mm}
+where n is normal vector to the line.
+
+
+\vspace{3 mm}
+Hence the normal vector of XZ = $\binom{1}{-1}$ and the normal vector of ZY = $\binom{1}{2}$
+
+\end{frame}
+
+\begin{frame}
+\vspace{2 mm}
+So The direction vector of $m_1$ of XZ is $\binom{1}{1}$
+\vspace{2 mm}
+and the direction vector of $m_2$ of XZ is $\binom{-2}{1}$.
+\vspace{2 mm}
+Hence, the equation of AB matrix form is : 
+\vspace{2 mm}
+
+\setlength{\parindent}{3.6cm}
+(1 \ 1)$\boldsymbol{x}$=$p_1$
+\vspace{2 mm}
+
+\setlength{\parindent}{0cm}
+Now since AB passes through A=$\binom{1}{-2}$, so
+\vspace{2 mm}
+
+\setlength{\parindent}{3.6cm}
+(1 \ 1)$\binom{1}{-2}$= $p_1$
+\vspace{2 mm}
+
+
+$p_1$ = -1
+\setlength{\parindent}{0cm}
+\vspace{2 mm}
+
+
+Therefore equation of AB is (1 \ 1)$\boldsymbol{x}=-1$
+
+
+\vspace{2 mm}
+Similarly, the equation of AC matrix form is : 
+\vspace{2 mm}
+
+\setlength{\parindent}{3.6cm}
+(-2 \ 1)$\boldsymbol{x}$=$p_2$
+\vspace{2 mm}
+
+\setlength{\parindent}{0cm}
+Now since AC passes through $\binom{1}{-2}$, so
+\vspace{2 mm}
+
+\setlength{\parindent}{3.6cm}
+(-2 \ 1)$\binom{1}{-2}$= $p_2$
+\vspace{2 mm}
+
+
+$p_2$ = -4
+\setlength{\parindent}{0cm}
+\vspace{2 mm}
+
+
+\end{frame}
+
+\begin{frame}
+\vspace{2 mm}
+\setlength{\parindent}{2cm}
+Therefore equation of AC is (-2 \ 1)$\boldsymbol{x}=-4$
+\vspace{2 mm}
+
+
+
+
+\setlength{\parindent}{0cm}
+
+Now Let's find out the point of intersection of AB and XZ
+
+\setlength{\parindent}{3.6cm}
+\vspace{2 mm}
+(1 \ -1)$\boldsymbol{x} = -5$    \ \ (XZ)
+
+\vspace{2 mm}
+(1 \ 1)$\boldsymbol{x}=-1$           \ \ (AB)
+
+\vspace{2 mm}
+ \setlength{\parindent}{0cm}
+  Stacking both equations:
+  \setlength{\parindent}{3.6cm}
+  \vspace{2 mm}
+   $\binom{1 \ -1}{1 \ 1}$ $\boldsymbol{x}$ = $\binom{5}{-1}$
+
+   \vspace{2 mm}
+$\boldsymbol{x}$ = $\binom{-3}{2}$
+
+\setlength{\parindent}{0cm}
+Similarly,the point of intersection of ZY and AC:
+
+\setlength{\parindent}{3.6cm}
+(-2 \ 1)$\boldsymbol{x}$ = -4          \ \ (AC)
+
+\vspace{2 mm}
+  (1 \  2)$\boldsymbol{x}=0$                 \ \ (ZY)
+  
+\vspace{2 mm}
+  \setlength{\parindent}{0cm}
+  Stacking both equations:
+  \setlength{\parindent}{3.6cm}
+  \vspace{2 mm}
+  $\binom{1 \ 2}{-2 \ 1}$ $\boldsymbol{x}$ = $\binom{0}{-4}$
+  \vspace{2 mm}
+  
+  
+$\boldsymbol{x}$ = $\binom{1.6}{-0.8}$
+\end{frame}
+
+\begin{frame}
+
+\vspace{2 mm}
+By mid point formula  X = (A+B)/2 and Y = (A+C)/2
+
+
+\vspace{2 mm}
+so, B = 2X - A and C = 2Y - A
+
+
+\vspace{2 mm}
+B = 2$\binom{-3}{2}$ - $\binom{1}{-2}$ and C = 2$\binom{1.6}{-0.8}$ - $\binom{1}{-2}$
+  \setlength{\parindent}{1.2cm}
+  
+  
+\vspace{2 mm}
+B = $\binom{-7}{6}$ \ and \ C = $\binom{2.2}{0.4}$
+  \setlength{\parindent}{0cm}
+\vspace{2 mm}
+
+
+Hence the direction vector of BC is $\binom{9.2}{-5.6}$\
+
+
+\vspace{2 mm}
+so normal vector is $\binom{-5.6}{-9.2}$\
+
+
+\vspace{2 mm}
+Equation of BC is $n^T$ $\boldsymbol{x}$ = $n^T$B 
+
+
+
+\vspace{2 mm}
+or it can be also written as  $n^T$ $\boldsymbol{x}$ = $n^T$C.
+For simplicity in calculation,we are considering B.
+
+
+\vspace{2 mm}
+  \setlength{\parindent}{3.6cm}
+$n^T$ = (-5.6  \ -9.2)  .
+Because  n = $\binom{-5.6}{-9.2}$\
+
+  \setlength{\parindent}{0cm}
+\vspace{2 mm}
+So equation of BC is (-5.6  \ -9.2)$\boldsymbol{x}$ = -16
+  \setlength{\parindent}{3.6cm}
+\vspace{2 mm}
+
+
+(14  \ 23)$\boldsymbol{x}$ = 40
+\end{frame}
+
+\begin{frame}{Approach 2(Generalized way)}
+\vspace{2 mm}
+If we are given a line (m \ -1)$\boldsymbol{x}$ = -c, then the mirror image of a point of a point P=$\boldsymbol{x}$ is given by
+
+\vspace{2 mm}
+
+$\boldsymbol{x'}$  = \nicefrac{1}{(1+ $m^2$)} $\binom{1 - m^2 \ \ 2m}{\ 2m \ \ m^2 - 1}$ $\boldsymbol{x}$ -  \nicefrac{1}{(1+ $m^2$)} $\binom{2mc}{-2c}$
+\vspace{2 mm}
+
+In our case, image of A about  (1 \ -1)$\boldsymbol{x}$ = -5 is B.
+\vspace{2 mm}
+(Because we are taking the image across the perpendicular bisector)
+
+
+
+
+\vspace{2 mm}
+And image of A about  (1 \ 2)$\boldsymbol{x}$ = 0 is C.
+
+
+
+\vspace{2 mm}
+So for (1 \ -1)$\boldsymbol{x}$ = -5, m=1 and c=5,Hence
+
+
+
+\vspace{2 mm}
+$\boldsymbol{x'}$  =  $\binom{0 \ \ 1}{\ 1 \ \ 0}$ $\binom{1}{-2}$ -   $\binom{5}{-5}$
+
+
+\vspace{2 mm}
+$\boldsymbol{x'}$ = $\binom{-7}{6}$
+
+
+\vspace{2 mm}
+Therefore,B = $\binom{-7}{6}$
+\end{frame}
+\begin{frame}
+\vspace{2 mm}
+Similarly for  (1 \ 2)$\boldsymbol{x}$ = 0, m=-1/2 and c = 0,Hence
+
+
+\vspace{2 mm}
+$\boldsymbol{x'}$  =  $\binom{3/5 \ \ -4/5}{\ -4/5 \ \ 3/5}$ $\binom{1}{-2}$ -   $\binom{0}{0}$
+
+
+\vspace{2 mm}
+$\boldsymbol{x'}$ = $\binom{11/5}{2/5}$
+
+\vspace{2 mm}
+Therefore,C = $\binom{11/5}{2/5}$
+
+
+\vspace{2 mm}
+Since we have the two coordinates B and C, 
+the equation of BC is 
+
+\setlength{\parindent}{3.6cm}
+\vspace{2 mm}
+(14  \ 23)$\boldsymbol{x}$ = 40
+\end{frame}
+\includegraphics[scale=0.7]{Figure.png}
+
+\end{document}
