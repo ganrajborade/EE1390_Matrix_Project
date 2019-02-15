@@ -1,0 +1,131 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+def dir_vec(AB):
+    return np.matmul(AB,dvec)
+
+def norm_vec(AB):
+	return np.matmul(omat,np.matmul(AB,dvec))
+
+A = np.array([1,-2])
+dvec = np.array([-1,1])
+omat = np.array([[0,1],[-1,0]])
+
+#Given the equation of perpendicular bisector of AB ( XZ ) is [1  -1]x + 5 = 0.
+#Since the equation in matrix form of line is n^T * x = p , hence in this case p = -5
+#First we find out the direction vector of AB.
+n1 = np.array([1,-1])
+dirvec_AB = np.matmul(omat,n1)
+
+
+#Here dirvec_AB will be the direction vector of AB
+
+m1 = dirvec_AB
+M1 = np.vstack((n1,m1))
+p = np.zeros(2)
+p[0] = -5 #(As p[0] = p as mentioned above in the comment)
+p[1] = m1[0]*A[0] + m1[1]*A[1]
+ 
+X = np.matmul(np.linalg.inv(M1),p) #X is the point of intersection of AB and the perpendicular bisector of AB (XZ)
+
+#  --------------------------------
+
+#Given the equation of perpendicular bisector of AC ( ZY ) is [1  2]x = 0.
+#Since the equation in matrix form of line is n^T * x = q , hence in this case q = 0
+#First we find out the direction vector of AC.
+n2 = np.array([1,2]) 
+
+
+dirvec_AC = np.matmul(omat,n2)
+
+#Here dirvec_AC will be the direction vector of AC
+
+m2 = dirvec_AC
+M2 = np.vstack((n2,m2))
+q = np.zeros(2)
+q[0] = 0 #(As q[0] = q as mentioned above in the above comment)
+q[1] = m2[0]*A[0] + m2[1]*A[1]
+ 
+Y = np.matmul(np.linalg.inv(M2),q) #Y is the point of intersection of AC and the perpendicular bisector of AC (ZY)
+
+o1 = np.array([1,-1])
+o2 = np.array([1,2])
+O = np.vstack((o1,o2))
+r = np.zeros(2)
+r[0] = -5
+r[1] = 0
+Z = np.matmul(np.linalg.inv(O),r) #This will give us the coordinate of Z which is the intersection of perpendicular bisectors of AB and AC .
+print(Z)
+#Now for finding the coordinates of point B and C , We need to use the midpoint formula
+
+B = 2*X - A
+C = 2*Y - A
+print("The coordinates of point B in matrix form is : ",B)
+print("The coordinates of point C in matrix form is : ",C)
+
+
+
+#Now we have to find the direction vector of BC:
+BC = np.vstack((B,C)).T
+d1 = dir_vec(BC)   # Here d1 is the direction vector of BC
+d2 = norm_vec(BC)
+s = np.matmul(d2,BC[:,0])
+print("The direction vector of BC is : ",d1)
+print("Hence the equation of BC in matrix form is : ",d2,"x = ",s)
+
+print("Or the equation of BC in the simpler form can be written as : ",(-5/2)*d2,"x = ",(-5/2)*s)
+
+
+#Drawing the diagram:
+
+len = 10
+lam_1 = np.linspace(0,1,len)
+
+x_AB = np.zeros((2,10))
+x_BC = np.zeros((2,10))
+x_CA = np.zeros((2,10))
+x_XZ = np.zeros((2,10))
+x_ZY = np.zeros((2,10))
+
+for i in range(len):
+    temp1 = A + lam_1[i]*(B-A)
+    x_AB[:,i] = temp1.T
+    temp2 = B + lam_1[i]*(C-B)
+    x_BC[:,i] = temp2.T
+    temp3 = C + lam_1[i]*(A-C)
+    x_CA[:,i] = temp3.T
+    temp4 = X + lam_1[i]*(Z-X)
+    x_XZ[:,i] = temp4.T
+    temp5 = Z + lam_1[i]*(Y-Z)
+    x_ZY[:,i] = temp5.T
+    
+    
+    
+plt.plot(x_AB[0,:],x_AB[1,:],label = '$AB$')
+plt.plot(x_BC[0,:],x_BC[1,:],label = '$BC$')
+plt.plot(x_CA[0,:],x_CA[1,:],label = '$CA$')
+plt.plot(x_XZ[0,:],x_XZ[1,:],label = '$XZ$')# XZ is the perpendicular bisector of AB
+plt.plot(x_ZY[0,:],x_ZY[1,:],label = '$ZY$')# ZY is the perpendicular bisector of AC
+
+
+
+plt.plot(A[0],A[1],'o')
+plt.plot(B[0],B[1],'o')
+plt.plot(C[0],C[1],'o')
+plt.plot(X[0],X[1],'o')
+plt.plot(Y[0],Y[1],'o')
+plt.plot(Z[0],Z[1],'o')
+
+plt.text(A[0]*(1+0.3),A[1]*(1),'A(1,-2)')
+plt.text(B[0]*(1+0.1),B[1]*(1),'B(-7,6)')
+plt.text(C[0]*(1+0.09),C[1]*(1-0.03),'C(2.2,0.4)')
+plt.text(X[0]*(1-0.07),X[1]*(1),'X')
+plt.text(Y[0]*(1+0.1),Y[1]*(1),'Y')
+plt.text(Z[0]*(1+0.1),Z[1]*(1),'Z')
+plt.axis('equal')
+plt.legend(loc ='best')
+plt.xlim(-10,7)
+plt.ylim(-6,10)
+plt.grid()
+plt.show()
